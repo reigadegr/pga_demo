@@ -116,7 +116,10 @@ jobs:
           bin_name="pga_demo"
           wget https://github.com/reigadegr/pga_demo/raw/main/build_nightly.sh
           sh build_nightly.sh
-          dd if=target/"${{ matrix.target }}"/release/$bin_name of=../"${{ matrix.target }}"_utils/$bin_name
+          file="$(find target -name "pga_demo")"
+          for i in $file; do
+            dd if=$i of=../"${{ matrix.target }}"_utils/$bin_name
+          done
 
       - name: Upload to GitHub artifacts
         uses: actions/upload-artifact@v4.4.3
