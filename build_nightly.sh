@@ -1,7 +1,6 @@
 #!/bin/bash
 
 export RUSTFLAGS="
-    -C default-linker-libraries \
     -Z external-clangrt \
     -Z validate-mir \
     -Z verify-llvm-ir \
@@ -21,12 +20,12 @@ export RUSTFLAGS="
     -C link-args=-Wl,-z,relro,-z,now,-x,-z,noexecstack,-s,--strip-all
 " 
 
-cargo update
-
 export CARGO_TERM_COLOR=always
 
 export JEMALLOC_SYS_DISABLE_WARN_ERROR=1
 
 export CCACHE_DISABLE=1
 
-cargo +nightly build --target "aarch64-unknown-linux-musl" --bin "pga_demo" -Z build-std -Z trim-paths
+export PATH="/root/musl_tools/bin:$PATH"
+
+cargo +nightly zigbuild --target "aarch64-unknown-linux-musl" --bin "pga_demo" -Z build-std -Z trim-paths
