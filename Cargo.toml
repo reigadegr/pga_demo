@@ -1,0 +1,25 @@
+[package]
+name = "pga_demo"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+async-trait = "0.1.89"
+pingora = { version = "0.6.0", features = ["lb"] }
+libz-sys = { git = "https://github.com/rust-lang/libz-sys" }
+
+[profile.dev]
+debug = 0
+debug-assertions = true
+# panic = "abort"
+incremental = true
+
+[profile.release]
+overflow-checks = false
+codegen-units = 1
+lto = "fat"
+opt-level = 3
+strip = true
+debug = 0
+debug-assertions = false
+incremental = false
