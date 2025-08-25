@@ -711,6 +711,7 @@ dependencies = [
 [[package]]
 name = "libz-sys"
 version = "1.1.22"
+source = "git+https://github.com/rust-lang/libz-sys#1c2c7b04f585f86d9bd203bccf631a5dc2bdabc4"
 dependencies = [
  "cc",
  "libc",

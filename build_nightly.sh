@@ -29,4 +29,4 @@ export JEMALLOC_SYS_DISABLE_WARN_ERROR=1
 
 export CCACHE_DISABLE=1
 
-cargo +nightly zigbuild --target "aarch64-unknown-linux-musl" --bin "pga_demo" -Z build-std -Z trim-paths
+cargo +nightly build --target "aarch64-unknown-linux-musl" --bin "pga_demo" -Z build-std -Z trim-paths

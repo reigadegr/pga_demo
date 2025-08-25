@@ -1,3 +1,12 @@
+#![warn(
+    clippy::nursery,
+    clippy::pedantic,
+    clippy::style,
+    clippy::complexity,
+    clippy::perf,
+    clippy::correctness,
+    clippy::suspicious
+)]
 use async_trait::async_trait;
 use pingora::{http::ResponseHeader, prelude::*};
 
@@ -14,7 +23,7 @@ impl ProxyHttp for Gateway {
         _session: &mut Session,
         _ctx: &mut Self::CTX,
     ) -> Result<Box<HttpPeer>> {
-        let peer = Box::new(HttpPeer::new("0.0.0.0:9000", false, "".to_string()));
+        let peer = Box::new(HttpPeer::new("0.0.0.0:9000", false, String::new()));
         Ok(peer)
     }
 
