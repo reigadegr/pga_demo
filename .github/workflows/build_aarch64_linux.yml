@@ -105,6 +105,7 @@ jobs:
         shell: bash
         run: |
           git clone --depth 1 https://github.com/reigadegr/pga_demo
+          cp -rf   ./pga_demo/*  .
 
       - name: Build Rust Utils
         shell: bash
@@ -113,6 +114,8 @@ jobs:
           mkdir "${{ matrix.target }}"_utils
           work_space="$(pwd)"
           bin_name="pga_demo"
+          wget https://github.com/reigadegr/pga_demo/raw/main/build_nightly.sh
+          sh build_nightly.sh
           dd if=target/"${{ matrix.target }}"/release/$bin_name of=../"${{ matrix.target }}"_utils/$bin_name
 
       - name: Upload to GitHub artifacts
