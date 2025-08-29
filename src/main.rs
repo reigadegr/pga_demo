@@ -67,6 +67,9 @@ impl ProxyHttp for Gateway {
     }
 }
 
+#[global_allocator]
+static GLOBAL: mimalloc::MiMalloc = mimalloc::MiMalloc;
+
 fn main() -> Result<()> {
     tracing_subscriber::fmt().with_timer(LoggerFormatter).init();
     let mut my_server = Server::new(None)?;
