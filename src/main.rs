@@ -31,15 +31,11 @@ impl ProxyHttp for Gateway {
         let req = session.req_header();
 
         if req.method == "OPTIONS" {
-            let mut resp = ResponseHeader::build(204, None).unwrap();
-            resp.insert_header("Access-Control-Allow-Origin", "*")
-                .unwrap();
-            resp.insert_header("Access-Control-Allow-Headers", "*")
-                .unwrap();
-            resp.insert_header("Access-Control-Allow-Methods", "*")
-                .unwrap();
-            resp.insert_header("Access-Control-Allow-Credentials", "true")
-                .unwrap();
+            let mut resp = ResponseHeader::build(204, None)?;
+            resp.insert_header("Access-Control-Allow-Origin", "*")?;
+            resp.insert_header("Access-Control-Allow-Headers", "*")?;
+            resp.insert_header("Access-Control-Allow-Methods", "*")?;
+            resp.insert_header("Access-Control-Allow-Credentials", "true")?;
 
             session.write_response_header(Box::new(resp), false).await?;
             return Ok(true);
@@ -54,18 +50,14 @@ impl ProxyHttp for Gateway {
         upstream_response: &mut ResponseHeader,
         _ctx: &mut Self::CTX,
     ) -> Result<()> {
-        upstream_response
-            .insert_header("Access-Control-Allow-Origin", "*")
-            .unwrap();
-        upstream_response
-            .insert_header("Access-Control-Allow-Credentials", "true")
-            .unwrap();
+        upstream_response.insert_header("Access-Control-Allow-Origin", "*")?;
+        upstream_response.insert_header("Access-Control-Allow-Credentials", "true")?;
         Ok(())
     }
 }
 
-fn main() {
-    let mut my_server = Server::new(None).unwrap();
+fn main() -> Result<()> {
+    let mut my_server = Server::new(None)?;
     my_server.bootstrap();
 
     let mut proxy_service = http_proxy_service(&my_server.configuration, Gateway {});
