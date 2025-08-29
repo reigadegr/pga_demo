@@ -2,3 +2,4 @@
 **/*.bak
 *lock*
 .idea
+*patch

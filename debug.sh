@@ -1,2 +1,2 @@
 cargo fmt
-cargo +nightly clippy
+cargo clippy

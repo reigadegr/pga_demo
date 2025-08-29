@@ -8,7 +8,18 @@
     clippy::suspicious
 )]
 use async_trait::async_trait;
+use chrono::Local;
 use pingora::{http::ResponseHeader, prelude::*};
+use std::fmt;
+use tracing_subscriber::fmt::{format::Writer, time::FormatTime};
+
+struct LoggerFormatter;
+
+impl FormatTime for LoggerFormatter {
+    fn format_time(&self, w: &mut Writer<'_>) -> fmt::Result {
+        write!(w, "{}", Local::now().format("%Y-%m-%d %H:%M:%S"))
+    }
+}
 
 pub struct Gateway {}
 
@@ -57,6 +68,7 @@ impl ProxyHttp for Gateway {
 }
 
 fn main() -> Result<()> {
+    tracing_subscriber::fmt().with_timer(LoggerFormatter).init();
     let mut my_server = Server::new(None)?;
     my_server.bootstrap();
 
