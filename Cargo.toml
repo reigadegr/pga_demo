@@ -5,11 +5,11 @@ edition = "2024"
 
 [dependencies]
 async-trait = "0.1.89"
-chrono = "0.4.41"
+chrono = "0.4.43"
 mimalloc = { version = "0.1.48", features = ["no_thp", "override", "v3"] }
 pingora = { version = "0.6.0", features = ["lb"] }
-tracing = "0.1.41"
-tracing-subscriber = { version = "0.3.19", features = ["local-time"] }
+tracing = "0.1.44"
+tracing-subscriber = { version = "0.3.22", features = ["local-time"] }
 
 [profile.dev]
 debug = 0
@@ -25,3 +25,4 @@ strip = true
 debug = 0
 debug-assertions = false
 incremental = false
+panic = "abort"

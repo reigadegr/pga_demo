@@ -34,7 +34,7 @@ impl ProxyHttp for Gateway {
         _session: &mut Session,
         _ctx: &mut Self::CTX,
     ) -> Result<Box<HttpPeer>> {
-        let peer = Box::new(HttpPeer::new("127.0.0.1:9190", false, String::new()));
+        let peer = Box::new(HttpPeer::new("127.0.0.1:3000", false, String::new()));
         Ok(peer)
     }
 
