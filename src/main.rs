@@ -1,12 +1,3 @@
-#![warn(
-    clippy::nursery,
-    clippy::pedantic,
-    clippy::style,
-    clippy::complexity,
-    clippy::perf,
-    clippy::correctness,
-    clippy::suspicious
-)]
 use async_trait::async_trait;
 use chrono::Local;
 use pingora::{http::ResponseHeader, prelude::*};
